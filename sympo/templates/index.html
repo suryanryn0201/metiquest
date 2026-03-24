@@ -35,9 +35,10 @@
                 <li><a href="#events" class="nav-link" data-target="events">EVENTS</a></li>
                 <li><a href="#coordinators" class="nav-link" data-target="coordinators">COORDINATORS</a></li>
                 <li><a href="#gallery" class="nav-link" data-target="gallery">GALLERY</a></li>
+                <li class="mobile-register">
+                    <a href="{{ reg_link }}" target="_blank" class="btn-register">REGISTER</a>
+                </li>
             </ul>
-
-            <a href="{{ reg_link }}" target="_blank" class="btn-register nav-link">REGISTER</a>
 
             <div class="hamburger">
                 <span class="bar"></span>
@@ -79,25 +80,92 @@
 
         <section id="events" class="page-section section-container">
             <h2 class="section-title">Symposium <span class="orange">Events</span></h2>
+
+            <h3 class="coord-split-title">Technical Events</h3>
             <div class="events-grid">
-                {% for event in events %}
+                {% for event in tech_events %}
                 <div class="event-card">
-                    <div class="card-header">
-                        <h3>{{ event.name }}</h3>
-                        <span
-                            class="badge {% if event.category == 'Technical' %}tech-badge{% else %}non-tech-badge{% endif %}">
-                            {{ event.category }}
-                        </span>
+                    {% if event.poster %}
+                    <div class="event-poster">
+                        <img src="{{ event.poster.url }}" alt="{{ event.name }} Poster"
+                            style="width: 100%; height: auto; border-radius: 8px 8px 0 0;">
                     </div>
+                    {% endif %}
+
+                    <div class="card-header" style="{% if event.poster %}padding-top: 15px;{% endif %}">
+                        <h3>{{ event.name }}</h3>
+                        <span class="badge tech-badge">Technical</span>
+                    </div>
+
                     <p class="event-desc">{{ event.description }}</p>
+
                     <div class="event-meta">
+                        <p><strong>📍 Venue:</strong> {{ event.venue }}</p>
+                        {% if event.prize_pool %}
+                        <p><strong>🏆 Prize:</strong> {{ event.prize_pool }}</p>
+                        {% endif %}
                         <p><strong>🕒 Time:</strong> {{ event.start_time|time:"H:i" }} - {{ event.end_time|time:"H:i" }}
                         </p>
                         <p><strong>👥 Max Team Size:</strong> {{ event.max_members }}</p>
+
+                        <div class="event-coordinators mt-2">
+                            <strong>📞 Contacts:</strong>
+                            <ul style="list-style-type: none; padding-left: 0; margin-bottom: 0;">
+                                {% for coord in event.coordinators.all %}
+                                <li>{{ coord.name }} ({{ coord.contact_number }})</li>
+                                {% empty %}
+                                <li>TBA</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     </div>
                 </div>
                 {% empty %}
-                <p class="text-center" style="grid-column: 1 / -1;">Events will be announced shortly!</p>
+                <p class="text-center" style="grid-column: 1 / -1;">Technical events will be announced shortly!</p>
+                {% endfor %}
+            </div>
+
+            <h3 class="coord-split-title mt-5">Non-Technical Events</h3>
+            <div class="events-grid">
+                {% for event in non_tech_events %}
+                <div class="event-card">
+                    {% if event.poster %}
+                    <div class="event-poster">
+                        <img src="{{ event.poster.url }}" alt="{{ event.name }} Poster"
+                            style="width: 100%; height: auto; border-radius: 8px 8px 0 0;">
+                    </div>
+                    {% endif %}
+
+                    <div class="card-header" style="{% if event.poster %}padding-top: 15px;{% endif %}">
+                        <h3>{{ event.name }}</h3>
+                        <span class="badge non-tech-badge">Non-Technical</span>
+                    </div>
+
+                    <p class="event-desc">{{ event.description }}</p>
+
+                    <div class="event-meta">
+                        <p><strong>📍 Venue:</strong> {{ event.venue }}</p>
+                        {% if event.prize_pool %}
+                        <p><strong>🏆 Prize:</strong> {{ event.prize_pool }}</p>
+                        {% endif %}
+                        <p><strong>🕒 Time:</strong> {{ event.start_time|time:"H:i" }} - {{ event.end_time|time:"H:i" }}
+                        </p>
+                        <p><strong>👥 Max Team Size:</strong> {{ event.max_members }}</p>
+
+                        <div class="event-coordinators mt-2">
+                            <strong>📞 Contacts:</strong>
+                            <ul style="list-style-type: none; padding-left: 0; margin-bottom: 0;">
+                                {% for coord in event.coordinators.all %}
+                                <li>{{ coord.name }} ({{ coord.contact_number }})</li>
+                                {% empty %}
+                                <li>TBA</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <p class="text-center" style="grid-column: 1 / -1;">Non-technical events will be announced shortly!</p>
                 {% endfor %}
             </div>
         </section>
@@ -116,7 +184,7 @@
                     {% endif %}
                     <h4>{{ coord.name }}</h4>
                     <p class="role-tag faculty-tag">Faculty</p>
-                    <p class="contact">📞 {{ coord.contact_number }}</p>
+                    <p class="contact">{{ coord.contact_number }}</p>
                 </div>
                 {% empty %}
                 <p class="text-center" style="grid-column: 1 / -1;">Faculty coordinators will be updated soon.</p>
@@ -133,8 +201,10 @@
                     <img src="{% static 'images/default-avatar.png' %}" alt="Default Avatar" class="coord-avatar">
                     {% endif %}
                     <h4>{{ coord.name }}</h4>
-                    <p class="role-tag student-tag">Student</p>
-                    <p class="contact">📞 {{ coord.contact_number }}</p>
+
+                    <p class="role-tag student-tag">Student {% if coord.year %}| {{ coord.year }}{% endif %}</p>
+
+                    <p class="contact"> {{ coord.contact_number }}</p>
                 </div>
                 {% empty %}
                 <p class="text-center" style="grid-column: 1 / -1;">Student coordinators will be updated soon.</p>
