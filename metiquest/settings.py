@@ -120,6 +120,7 @@ USE_I18N = True
 
 USE_TZ = True
 
+# Updated STORAGES block - Use StaticFilesStorage to avoid 'MissingFileError'
 STORAGES = {
     "default": {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
@@ -129,16 +130,21 @@ STORAGES = {
     },
 }
 
+# Add this only for compatibility with the Cloudinary library check
+STATICFILES_STORAGE = 'whitenoise.storage.StaticFilesStorage'
 # STATIC FILES (CSS, JS, Images)
-STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-if not os.path.exists(STATICFILES_DIRS[0]):
-    os.makedirs(STATICFILES_DIRS[0])
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+# This assumes you have a folder named 'static' in your main project folder
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
+
+# Ensure WhiteNoise is ready for production
+WHITENOISE_USE_FINDERS = True
 # MEDIA FILES (Uploads go to Cloudinary)
 MEDIA_URL = '/media/'
 CLOUDINARY_STORAGE = {
     'CLOUDINARY_URL': os.getenv('CLOUDINARY_URL')
 }
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
