@@ -138,7 +138,6 @@ if not os.path.exists(STATICFILES_DIRS[0]):
 
 # MEDIA FILES (Uploads go to Cloudinary)
 MEDIA_URL = '/media/'
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 CLOUDINARY_STORAGE = {
     'CLOUDINARY_URL': os.getenv('CLOUDINARY_URL')
 }

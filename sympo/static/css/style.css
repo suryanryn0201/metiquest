@@ -256,3 +256,62 @@ input:checked + .slider:before { transform: translateX(30px); }
     .btn-register { display: none; } /* Hide from regular nav on mobile if needed, or place inside hamburger */
     .section-title { font-size: 2.2rem; }
 }
+
+.footer {
+    background: var(--header-bg); /* Matches your existing nav background */
+    padding: 40px 20px 20px;
+    margin-top: 50px;
+    border-top: 2px solid var(--orange);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 30px;
+}
+
+.dev-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 0.8rem;
+    color: var(--orange);
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+}
+
+.dev-link {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.dev-link:hover {
+    color: var(--orange);
+}
+
+.separator {
+    margin: 0 10px;
+    color: #666;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+}
