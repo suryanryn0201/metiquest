@@ -141,3 +141,4 @@ MEDIA_URL = '/media/'
 CLOUDINARY_STORAGE = {
     'CLOUDINARY_URL': os.getenv('CLOUDINARY_URL')
 }
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
