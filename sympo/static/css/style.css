@@ -317,13 +317,6 @@ input:checked + .slider:before { transform: translateX(30px); }
     }
 }
 
-/* Ensure mobile register is hidden on desktop */
-@media (min-width: 769px) {
-    .mobile-register {
-        display: none;
-    }
-}
-
 .footer {
     background: var(--header-bg); /* Matches your existing nav background */
     padding: 40px 20px 20px;
