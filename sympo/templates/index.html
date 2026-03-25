@@ -15,16 +15,6 @@
 
 <body>
     <header class="header">
-        <div class="theme-switch-wrapper">
-            <label class="theme-switch" for="checkbox">
-                <input type="checkbox" id="checkbox" />
-                <div class="slider round">
-                    <span class="icon sun">☀️</span>
-                    <span class="icon moon">🌙</span>
-                </div>
-            </label>
-        </div>
-
         <nav class="navbar">
             <div class="logo-container" data-target="home">
                 <video src="{% static 'images/logo.mp4' %}" class="logo-icon" autoplay loop muted playsinline></video>
@@ -37,26 +27,38 @@
                 <li><a href="#events" class="nav-link" data-target="events">EVENTS</a></li>
                 <li><a href="#coordinators" class="nav-link" data-target="coordinators">COORDINATORS</a></li>
                 <li><a href="#gallery" class="nav-link" data-target="gallery">GALLERY</a></li>
-                <li class="mobile-register"
-                    style="display: flex; flex-direction: column; gap: 15px; width: 80%; text-align: center;">
-                    <a href="{{ sympo_reg_link }}" target="_blank" class="btn-register" style="width: 100%;">SYMPO
+
+                <li class="mobile-register">
+                    <a href="{{ sympo_reg_link }}" target="_blank" class="btn-register">SYMPO REGISTER</a>
+                    <a href="{{ workshop_reg_link }}" target="_blank" class="btn-register btn-dark">WORKSHOP
                         REGISTER</a>
-                    <a href="{{ workshop_reg_link }}" target="_blank" class="btn-register"
-                        style="background: var(--dark); width: 100%;">WORKSHOP REGISTER</a>
                 </li>
             </ul>
-            <div class="desktop-register dropdown">
-                <a href="#" class="btn-register nav-link">REGISTER ▼</a>
-                <div class="dropdown-content">
-                    <a href="{{ sympo_reg_link }}" target="_blank">Symposium Events</a>
-                    <a href="{{ workshop_reg_link }}" target="_blank">Workshop Only</a>
-                </div>
-            </div>
 
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+            <div class="nav-actions">
+                <div class="theme-switch-wrapper">
+                    <label class="theme-switch" for="checkbox">
+                        <input type="checkbox" id="checkbox" />
+                        <div class="slider round">
+                            <span class="icon sun">☀️</span>
+                            <span class="icon moon">🌙</span>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="desktop-register dropdown">
+                    <a href="#" class="btn-register">REGISTER ▼</a>
+                    <div class="dropdown-content">
+                        <a href="{{ sympo_reg_link }}" target="_blank">Symposium Events</a>
+                        <a href="{{ workshop_reg_link }}" target="_blank">Workshop Only</a>
+                    </div>
+                </div>
+
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
             </div>
         </nav>
     </header>
@@ -104,7 +106,7 @@
                     </div>
                     {% endif %}
 
-                    <div class="card-header" style="{% if workshop.poster %}padding-top: 15px;{% endif %}">
+                    <div class="card-header {% if workshop.poster %}with-poster{% endif %}">
                         <h3>{{ workshop.name }}</h3>
                         <span class="badge tech-badge" style="background: #fff3e0; color: #e65100;">Hands-On</span>
                     </div>
@@ -144,7 +146,7 @@
                     </div>
                     {% endif %}
 
-                    <div class="card-header" style="{% if event.poster %}padding-top: 15px;{% endif %}">
+                    <div class="card-header {% if event.poster %}with-poster{% endif %}">
                         <h3>{{ event.name }}</h3>
                         <span class="badge tech-badge">Technical</span>
                     </div>
@@ -188,7 +190,7 @@
                     </div>
                     {% endif %}
 
-                    <div class="card-header" style="{% if event.poster %}padding-top: 15px;{% endif %}">
+                    <div class="card-header {% if event.poster %}with-poster{% endif %}">
                         <h3>{{ event.name }}</h3>
                         <span class="badge non-tech-badge">Non-Technical</span>
                     </div>
@@ -253,10 +255,8 @@
                     <img src="{% static 'images/default-avatar.png' %}" alt="Default Avatar" class="coord-avatar">
                     {% endif %}
                     <h4>{{ coord.name }}</h4>
-
                     <p class="role-tag student-tag">Student {% if coord.year %}| {{ coord.year }}{% endif %}</p>
-
-                    <p class="contact"> {{ coord.contact_number }}</p>
+                    <p class="contact">{{ coord.contact_number }}</p>
                 </div>
                 {% empty %}
                 <p class="text-center" style="grid-column: 1 / -1;">Student coordinators will be updated soon.</p>
@@ -283,6 +283,7 @@
             {% endfor %}
         </section>
     </div>
+
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-content">
@@ -294,8 +295,7 @@
                 <div class="developer-credits">
                     <p class="dev-title">DEVELOPED BY</p>
                     <div class="dev-names">
-                        <a href="https://linkedin.com/in/surya-narayanan" target="_blank" class="dev-link">Surya
-                            Narayanan and Murugan</a>
+                        <a target="_blank" class="dev-link">Surya Narayanan and Murugan</a>
                         <span class="separator">|</span>
                         <a href="#" target="_blank" class="dev-link">Web Team '26</a>
                     </div>
