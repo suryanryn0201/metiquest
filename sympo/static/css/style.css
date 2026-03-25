@@ -375,3 +375,55 @@ input:checked + .slider:before { transform: translateX(30px); }
         text-align: center;
     }
 }
+/* --- Dropdown Registration Button --- */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0; /* Aligns dropdown to the right edge of the button */
+    top: 120%;
+    background-color: var(--white);
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.15);
+    z-index: 1001;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.dropdown-content a {
+    color: var(--dark);
+    padding: 15px 20px;
+    text-decoration: none;
+    display: block;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.dropdown-content a:last-child {
+    border-bottom: none;
+}
+
+.dropdown-content a:hover {
+    background-color: var(--light);
+    color: var(--primary);
+    padding-left: 25px; /* Cool hover sliding effect */
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Hide the desktop dropdown when on mobile */
+@media (max-width: 768px) {
+    .desktop-register {
+        display: none !important;
+    }
+}

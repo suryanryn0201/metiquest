@@ -58,8 +58,31 @@ class Gallery(models.Model):
         return f"{self.heading} - {self.id}"
 
 class SiteSetting(models.Model):
-    registration_link = models.URLField(max_length=500, help_text="Paste your Google Form URL here")
-    is_active = models.BooleanField(default=True, help_text="Check to make this the active link")
+    sympo_registration_link = models.URLField(max_length=500, blank=True, null=True, help_text="Google Form URL for Symposium Events")
+    workshop_registration_link = models.URLField(max_length=500, blank=True, null=True, help_text="Google Form URL for the Workshop")
+    is_active = models.BooleanField(default=True, help_text="Check to make these the active links on the site")
 
     def __str__(self):
-        return "Symposium Registration Link"
+        return "Active Registration Links"
+
+# Add this new class to your models.py
+
+class Workshop(models.Model):
+    name = models.CharField(max_length=150)
+    poster = models.ImageField(upload_to='workshops/', null=True, blank=True, help_text="Workshop banner/poster")
+    
+    # Key people involved
+    guest_lecturer = models.CharField(max_length=150, help_text="Name and Designation of the Guest")
+    chairperson = models.CharField(max_length=150, help_text="Faculty Chairperson or main organizer")
+    
+    # Logistics
+    date = models.DateField()
+    start_time = models.TimeField(help_text="Format: HH:MM:SS")
+    end_time = models.TimeField(help_text="Format: HH:MM:SS")
+    venue = models.CharField(max_length=150, default="Main Auditorium")
+    registration_fee = models.CharField(max_length=100, null=True, blank=True, help_text="E.g., ₹200")
+    
+    description = models.TextField()
+
+    def __str__(self):
+        return self.name

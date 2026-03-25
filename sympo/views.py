@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Event, Coordinator, Gallery, SiteSetting
+from .models import Event, Coordinator, Gallery, SiteSetting, Workshop
 
 def index(request):
     # 1. Split events by category (keeping your time-based ordering)
@@ -15,7 +15,9 @@ def index(request):
     
     # 4. Settings / Registration Link
     settings = SiteSetting.objects.filter(is_active=True).first()
-    reg_link = settings.registration_link if settings else "#"
+    sympo_reg_link = settings.sympo_registration_link if settings and settings.sympo_registration_link else "#"
+    workshop_reg_link = settings.workshop_registration_link if settings and settings.workshop_registration_link else "#"
+    workshops = Workshop.objects.all().order_by('date', 'start_time')
 
     # 5. Pass everything to the template
     context = {
@@ -24,7 +26,9 @@ def index(request):
         'faculty_coordinators': faculty_coordinators,
         'student_coordinators': student_coordinators,
         'gallery_images': gallery_images,
-        'reg_link': reg_link,
+        'workshops': workshops,
+        'sympo_reg_link': sympo_reg_link,       # Updated context
+        'workshop_reg_link': workshop_reg_link,
     }
     
     return render(request, 'index.html', context)

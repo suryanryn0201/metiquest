@@ -33,13 +33,25 @@
 
             <ul class="nav-links">
                 <li><a href="#home" class="nav-link active" data-target="home">HOME</a></li>
+                <li><a href="#workshop" class="nav-link" data-target="workshop">WORKSHOP</a></li>
                 <li><a href="#events" class="nav-link" data-target="events">EVENTS</a></li>
                 <li><a href="#coordinators" class="nav-link" data-target="coordinators">COORDINATORS</a></li>
                 <li><a href="#gallery" class="nav-link" data-target="gallery">GALLERY</a></li>
-                <li class="mobile-register">
-                    <a href="{{ reg_link }}" target="_blank" class="btn-register">REGISTER</a>
+                <li class="mobile-register"
+                    style="display: flex; flex-direction: column; gap: 15px; width: 80%; text-align: center;">
+                    <a href="{{ sympo_reg_link }}" target="_blank" class="btn-register" style="width: 100%;">SYMPO
+                        REGISTER</a>
+                    <a href="{{ workshop_reg_link }}" target="_blank" class="btn-register"
+                        style="background: var(--dark); width: 100%;">WORKSHOP REGISTER</a>
                 </li>
             </ul>
+            <div class="desktop-register dropdown">
+                <a href="#" class="btn-register nav-link">REGISTER ▼</a>
+                <div class="dropdown-content">
+                    <a href="{{ sympo_reg_link }}" target="_blank">Symposium Events</a>
+                    <a href="{{ workshop_reg_link }}" target="_blank">Workshop Only</a>
+                </div>
+            </div>
 
             <div class="hamburger">
                 <span class="bar"></span>
@@ -78,6 +90,45 @@
                 <img src="{% static 'images/mascot.png' %}" alt="Mechanical Astronaut Robot" class="main-illustration">
             </div>
         </main>
+
+        <section id="workshop" class="page-section section-container bg-light">
+            <h2 class="section-title">Special <span class="orange">Workshop</span></h2>
+
+            <div class="events-grid">
+                {% for workshop in workshops %}
+                <div class="event-card">
+                    {% if workshop.poster %}
+                    <div class="event-poster">
+                        <img src="{{ workshop.poster.url }}" alt="{{ workshop.name }} Poster"
+                            style="width: 100%; height: auto; border-radius: 8px 8px 0 0;">
+                    </div>
+                    {% endif %}
+
+                    <div class="card-header" style="{% if workshop.poster %}padding-top: 15px;{% endif %}">
+                        <h3>{{ workshop.name }}</h3>
+                        <span class="badge tech-badge" style="background: #fff3e0; color: #e65100;">Hands-On</span>
+                    </div>
+
+                    <p class="event-desc">{{ workshop.description }}</p>
+
+                    <div class="event-meta">
+                        <p><strong>🎙️ Guest Lecturer:</strong> {{ workshop.guest_lecturer }}</p>
+                        <p><strong>👨‍🏫 Chairperson:</strong> {{ workshop.chairperson }}</p>
+                        <hr style="border: 0; border-top: 1px solid #ddd; margin: 10px 0;">
+                        <p><strong>📅 Date:</strong> {{ workshop.date }}</p>
+                        <p><strong>🕒 Time:</strong> {{ workshop.start_time|time:"H:i" }} - {{
+                            workshop.end_time|time:"H:i" }}</p>
+                        <p><strong>📍 Venue:</strong> {{ workshop.venue }}</p>
+                        {% if workshop.registration_fee %}
+                        <p><strong>💰 Fee:</strong> {{ workshop.registration_fee }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+                {% empty %}
+                <p class="text-center" style="grid-column: 1 / -1;">Workshop details will be announced shortly!</p>
+                {% endfor %}
+            </div>
+        </section>
 
         <section id="events" class="page-section section-container">
             <h2 class="section-title">Symposium <span class="orange">Events</span></h2>
