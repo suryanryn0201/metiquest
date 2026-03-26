@@ -41,7 +41,7 @@ body {
 }
 
 #home.active {
-    display: flex;
+    display: block;
 }
 
 @keyframes fadeIn {
@@ -130,7 +130,7 @@ body {
     color: var(--primary);
 }
 
-/* --- Action Group (Right Side Nav) --- */
+/* --- Action Group --- */
 .nav-actions {
     display: flex;
     align-items: center;
@@ -327,14 +327,14 @@ input:checked+.slider:before {
     background-color: var(--white);
 }
 
-/* --- Hero Section --- */
-.hero-section {
+/* --- Hero Section & Video --- */
+.hero-container-inner {
+    display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 5%;
     max-width: 1400px;
     margin: 0 auto;
-    min-height: calc(100vh - 80px);
 }
 
 .hero-content {
@@ -365,14 +365,20 @@ input:checked+.slider:before {
     margin-bottom: 20px;
 }
 
+.date-badges-wrapper {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
 .date-badge {
     background: var(--white);
-    padding: 12px 30px;
+    padding: 12px 25px;
     border-radius: 30px;
     font-weight: 800;
     color: var(--primary);
     border: 2px solid var(--primary);
-    margin-bottom: 30px;
 }
 
 .arena-text {
@@ -387,7 +393,6 @@ input:checked+.slider:before {
     margin-bottom: 40px;
 }
 
-/* Countdown */
 .countdown-container {
     display: flex;
     gap: 20px;
@@ -441,6 +446,24 @@ input:checked+.slider:before {
     }
 }
 
+/* Intro Video Container */
+.video-showcase {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto 50px auto;
+    padding: 0 5%;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.sympo-intro-video {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    border: 4px solid var(--white);
+    display: block;
+}
+
 /* --- Events Cards --- */
 .events-grid {
     display: grid;
@@ -455,6 +478,8 @@ input:checked+.slider:before {
     box-shadow: var(--shadow);
     transition: var(--transition);
     border-top: 5px solid var(--primary);
+    display: flex;
+    flex-direction: column;
 }
 
 .event-card:hover {
@@ -495,17 +520,114 @@ input:checked+.slider:before {
 
 .event-desc {
     color: var(--gray);
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     line-height: 1.6;
 }
 
-.event-meta {
-    background: var(--light);
-    padding: 15px;
-    border-radius: 10px;
+/* --- Custom UI Details Grid (Replaces old text format) --- */
+.ui-details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 15px;
+    margin-bottom: 25px;
 }
 
-/* --- Minimalist Coordinators --- */
+.ui-detail-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--light);
+    padding: 12px;
+    border-radius: 12px;
+    transition: var(--transition);
+}
+
+.ui-detail-item:hover {
+    background: var(--white);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
+}
+
+.ui-icon {
+    width: 24px;
+    height: 24px;
+    fill: var(--primary);
+    flex-shrink: 0;
+}
+
+.ui-detail-text {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.ui-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: var(--gray);
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+}
+
+.ui-value {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--dark);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* --- Custom Coordinators UI --- */
+.ui-coordinators-section {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px dashed rgba(0, 0, 0, 0.1);
+}
+
+.ui-coord-title {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: var(--gray);
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.ui-coord-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.ui-coord-pill {
+    background: var(--light);
+    display: inline-flex;
+    align-items: center;
+    border-radius: 30px;
+    padding: 6px 15px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.ui-coord-name {
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--dark);
+    margin-right: 8px;
+}
+
+.ui-coord-phone {
+    font-size: 0.75rem;
+    color: var(--primary);
+    font-weight: 600;
+    background: var(--white);
+    padding: 2px 8px;
+    border-radius: 15px;
+}
+
+/* --- Minimalist Coordinators (Faculty/Students section) --- */
 .coord-split-title {
     text-align: center;
     color: var(--gray);
@@ -682,10 +804,24 @@ input:checked+.slider:before {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+[data-theme="dark"] .ui-coordinators-section {
+    border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .ui-coord-pill {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .ui-detail-item:hover {
+    background: #2a2b2c;
+}
+
+[data-theme="dark"] .sympo-intro-video {
+    border-color: #242526;
+}
+
 /* --- Responsive Layout (Tablets & Mobile) --- */
 @media (max-width: 991px) {
-
-    /* Compress text sizes */
     .headline {
         font-size: 2rem;
     }
@@ -694,7 +830,7 @@ input:checked+.slider:before {
         font-size: 3.5rem;
     }
 
-    .hero-section {
+    .hero-container-inner {
         flex-direction: column;
         text-align: center;
         padding-top: 30px;
@@ -705,7 +841,10 @@ input:checked+.slider:before {
         margin-bottom: 20px;
     }
 
-    /* Mascot Fix: Show on mobile and resize */
+    .date-badges-wrapper {
+        justify-content: center;
+    }
+
     .hero-image {
         display: flex;
         justify-content: center;
@@ -718,12 +857,10 @@ input:checked+.slider:before {
         height: auto;
     }
 
-    /* Header Fixes */
     .hamburger {
         display: flex;
     }
 
-    /* Mobile Sliding Menu */
     .nav-links {
         position: fixed;
         top: 0;
@@ -748,7 +885,6 @@ input:checked+.slider:before {
         margin: 15px 0;
     }
 
-    /* Strictly Hide Desktop Button, Show Mobile Buttons */
     .desktop-register {
         display: none !important;
     }
@@ -770,5 +906,16 @@ input:checked+.slider:before {
     .footer-content {
         flex-direction: column;
         text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .ui-details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .ui-coord-pill {
+        width: 100%;
+        justify-content: space-between;
     }
 }

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}">
     <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&family=Playfair+Display:wght@700;900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playfair+Display:wght@700;900&display=swap"
         rel="stylesheet">
 </head>
 
@@ -65,31 +65,42 @@
 
     <div class="main-content">
         <main class="page-section active" id="home">
-            <div class="hero-content">
-                <p class="subtitle">National Level Mechanical Symposium</p>
-                <h1 class="headline">We build innovation in</h1>
-                <h2 class="main-title"><span class="orange">METI</span>QUEST<span class="orange">'26</span></h2>
+            <div class="hero-container-inner">
+                <div class="hero-content">
+                    <p class="subtitle">National Level Mechanical Symposium</p>
+                    <h1 class="headline">We build innovation in</h1>
+                    <h2 class="main-title"><span class="orange">METI</span>QUEST<span class="orange">'26</span></h2>
 
-                <div class="date-badge">
-                    <span>April 8th, 2026</span>
+                    <div class="date-badges-wrapper">
+                        <div class="date-badge"><span>Workshop: April 7th, 2026</span></div>
+                        <div class="date-badge"><span>Sympo: April 8th, 2026</span></div>
+                    </div>
+
+                    <p class="arena-text">⚙️ DEPARTMENT OF MECHANICAL ENGINEERING ⚙️</p>
+                    <p class="location">
+                        GOVERNMENT COLLEGE OF ENGINEERING<br>
+                        TIRUNELVELI, TAMILNADU
+                    </p>
+
+                    <div class="countdown-container">
+                        <div class="time-box"><span id="days">00</span><small>DAYS</small></div>
+                        <div class="time-box"><span id="hours">00</span><small>HOURS</small></div>
+                        <div class="time-box"><span id="minutes">00</span><small>MINS</small></div>
+                        <div class="time-box"><span id="seconds">00</span><small>SECS</small></div>
+                    </div>
                 </div>
 
-                <p class="arena-text">⚙️ DEPARTMENT OF MECHANICAL ENGINEERING ⚙️</p>
-                <p class="location">
-                    GOVERNMENT COLLEGE OF ENGINEERING<br>
-                    TIRUNELVELI, TAMILNADU
-                </p>
-
-                <div class="countdown-container">
-                    <div class="time-box"><span id="days">00</span><small>DAYS</small></div>
-                    <div class="time-box"><span id="hours">00</span><small>HOURS</small></div>
-                    <div class="time-box"><span id="minutes">00</span><small>MINS</small></div>
-                    <div class="time-box"><span id="seconds">00</span><small>SECS</small></div>
+                <div class="hero-image">
+                    <img src="{% static 'images/mascot.png' %}" alt="Mechanical Astronaut Robot"
+                        class="main-illustration">
                 </div>
             </div>
 
-            <div class="hero-image">
-                <img src="{% static 'images/mascot.png' %}" alt="Mechanical Astronaut Robot" class="main-illustration">
+            <div class="video-showcase" id="introVideoWrapper">
+                <video autoplay loop muted playsinline class="sympo-intro-video">
+                    <source src="{% static 'images/intro.mp4' %}" type="video/mp4"
+                        onerror="document.getElementById('introVideoWrapper').style.display='none';">
+                </video>
             </div>
         </main>
 
@@ -113,16 +124,69 @@
 
                     <p class="event-desc">{{ workshop.description }}</p>
 
-                    <div class="event-meta">
-                        <p><strong>🎙️ Guest Lecturer:</strong> {{ workshop.guest_lecturer }}</p>
-                        <p><strong>👨‍🏫 Chairperson:</strong> {{ workshop.chairperson }}</p>
-                        <hr style="border: 0; border-top: 1px solid #ddd; margin: 10px 0;">
-                        <p><strong>📅 Date:</strong> {{ workshop.date }}</p>
-                        <p><strong>🕒 Time:</strong> {{ workshop.start_time|time:"H:i" }} - {{
-                            workshop.end_time|time:"H:i" }}</p>
-                        <p><strong>📍 Venue:</strong> {{ workshop.venue }}</p>
+                    <div class="ui-details-grid">
+                        <div class="ui-detail-item">
+                            <svg class="ui-icon" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                            </svg>
+                            <div class="ui-detail-text">
+                                <span class="ui-label">Guest Lecturer</span>
+                                <span class="ui-value">{{ workshop.guest_lecturer }}</span>
+                            </div>
+                        </div>
+                        <div class="ui-detail-item">
+                            <svg class="ui-icon" viewBox="0 0 24 24">
+                                <path
+                                    d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z" />
+                            </svg>
+                            <div class="ui-detail-text">
+                                <span class="ui-label">Chairperson</span>
+                                <span class="ui-value">{{ workshop.chairperson }}</span>
+                            </div>
+                        </div>
+                        <div class="ui-detail-item">
+                            <svg class="ui-icon" viewBox="0 0 24 24">
+                                <path
+                                    d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z" />
+                            </svg>
+                            <div class="ui-detail-text">
+                                <span class="ui-label">Date</span>
+                                <span class="ui-value">{{ workshop.date }}</span>
+                            </div>
+                        </div>
+                        <div class="ui-detail-item">
+                            <svg class="ui-icon" viewBox="0 0 24 24">
+                                <path
+                                    d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" />
+                            </svg>
+                            <div class="ui-detail-text">
+                                <span class="ui-label">Time</span>
+                                <span class="ui-value">{{ workshop.start_time|time:"H:i" }} - {{
+                                    workshop.end_time|time:"H:i" }}</span>
+                            </div>
+                        </div>
+                        <div class="ui-detail-item">
+                            <svg class="ui-icon" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                            </svg>
+                            <div class="ui-detail-text">
+                                <span class="ui-label">Venue</span>
+                                <span class="ui-value">{{ workshop.venue }}</span>
+                            </div>
+                        </div>
                         {% if workshop.registration_fee %}
-                        <p><strong>💰 Fee:</strong> {{ workshop.registration_fee }}</p>
+                        <div class="ui-detail-item">
+                            <svg class="ui-icon" viewBox="0 0 24 24">
+                                <path
+                                    d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z" />
+                            </svg>
+                            <div class="ui-detail-text">
+                                <span class="ui-label">Fee</span>
+                                <span class="ui-value">{{ workshop.registration_fee }}</span>
+                            </div>
+                        </div>
                         {% endif %}
                     </div>
                 </div>
@@ -153,24 +217,62 @@
 
                     <p class="event-desc">{{ event.description }}</p>
 
-                    <div class="event-meta">
-                        <p><strong>📍 Venue:</strong> {{ event.venue }}</p>
+                    <div class="ui-details-grid">
+                        <div class="ui-detail-item">
+                            <svg class="ui-icon" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                            </svg>
+                            <div class="ui-detail-text">
+                                <span class="ui-label">Venue</span>
+                                <span class="ui-value">{{ event.venue }}</span>
+                            </div>
+                        </div>
+                        <div class="ui-detail-item">
+                            <svg class="ui-icon" viewBox="0 0 24 24">
+                                <path
+                                    d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" />
+                            </svg>
+                            <div class="ui-detail-text">
+                                <span class="ui-label">Time</span>
+                                <span class="ui-value">{{ event.start_time|time:"H:i" }} - {{ event.end_time|time:"H:i"
+                                    }}</span>
+                            </div>
+                        </div>
+                        <div class="ui-detail-item">
+                            <svg class="ui-icon" viewBox="0 0 24 24">
+                                <path
+                                    d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" />
+                            </svg>
+                            <div class="ui-detail-text">
+                                <span class="ui-label">Team Size</span>
+                                <span class="ui-value">Max {{ event.max_members }}</span>
+                            </div>
+                        </div>
                         {% if event.prize_pool %}
-                        <p><strong>🏆 Prize:</strong> {{ event.prize_pool }}</p>
+                        <div class="ui-detail-item">
+                            <svg class="ui-icon" viewBox="0 0 24 24">
+                                <path d="M19 3H5v18l7-3 7 3V3z" />
+                            </svg>
+                            <div class="ui-detail-text">
+                                <span class="ui-label">Prize</span>
+                                <span class="ui-value">{{ event.prize_pool }}</span>
+                            </div>
+                        </div>
                         {% endif %}
-                        <p><strong>🕒 Time:</strong> {{ event.start_time|time:"H:i" }} - {{ event.end_time|time:"H:i" }}
-                        </p>
-                        <p><strong>👥 Max Team Size:</strong> {{ event.max_members }}</p>
+                    </div>
 
-                        <div class="event-coordinators mt-2">
-                            <strong>📞 Contacts:</strong>
-                            <ul style="list-style-type: none; padding-left: 0; margin-bottom: 0;">
-                                {% for coord in event.coordinators.all %}
-                                <li>{{ coord.name }} ({{ coord.contact_number }})</li>
-                                {% empty %}
-                                <li>TBA</li>
-                                {% endfor %}
-                            </ul>
+                    <div class="ui-coordinators-section">
+                        <span class="ui-coord-title">Coordinators</span>
+                        <div class="ui-coord-tags">
+                            {% for coord in event.coordinators.all %}
+                            <div class="ui-coord-pill">
+                                <span class="ui-coord-name">{{ coord.name }}</span>
+                                <span class="ui-coord-phone">{{ coord.contact_number }}</span>
+                            </div>
+                            {% empty %}
+                            <div class="ui-coord-pill"><span class="ui-coord-name">TBA</span></div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -197,24 +299,62 @@
 
                     <p class="event-desc">{{ event.description }}</p>
 
-                    <div class="event-meta">
-                        <p><strong>📍 Venue:</strong> {{ event.venue }}</p>
+                    <div class="ui-details-grid">
+                        <div class="ui-detail-item">
+                            <svg class="ui-icon" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                            </svg>
+                            <div class="ui-detail-text">
+                                <span class="ui-label">Venue</span>
+                                <span class="ui-value">{{ event.venue }}</span>
+                            </div>
+                        </div>
+                        <div class="ui-detail-item">
+                            <svg class="ui-icon" viewBox="0 0 24 24">
+                                <path
+                                    d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" />
+                            </svg>
+                            <div class="ui-detail-text">
+                                <span class="ui-label">Time</span>
+                                <span class="ui-value">{{ event.start_time|time:"H:i" }} - {{ event.end_time|time:"H:i"
+                                    }}</span>
+                            </div>
+                        </div>
+                        <div class="ui-detail-item">
+                            <svg class="ui-icon" viewBox="0 0 24 24">
+                                <path
+                                    d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" />
+                            </svg>
+                            <div class="ui-detail-text">
+                                <span class="ui-label">Team Size</span>
+                                <span class="ui-value">Max {{ event.max_members }}</span>
+                            </div>
+                        </div>
                         {% if event.prize_pool %}
-                        <p><strong>🏆 Prize:</strong> {{ event.prize_pool }}</p>
+                        <div class="ui-detail-item">
+                            <svg class="ui-icon" viewBox="0 0 24 24">
+                                <path d="M19 3H5v18l7-3 7 3V3z" />
+                            </svg>
+                            <div class="ui-detail-text">
+                                <span class="ui-label">Prize</span>
+                                <span class="ui-value">{{ event.prize_pool }}</span>
+                            </div>
+                        </div>
                         {% endif %}
-                        <p><strong>🕒 Time:</strong> {{ event.start_time|time:"H:i" }} - {{ event.end_time|time:"H:i" }}
-                        </p>
-                        <p><strong>👥 Max Team Size:</strong> {{ event.max_members }}</p>
+                    </div>
 
-                        <div class="event-coordinators mt-2">
-                            <strong>📞 Contacts:</strong>
-                            <ul style="list-style-type: none; padding-left: 0; margin-bottom: 0;">
-                                {% for coord in event.coordinators.all %}
-                                <li>{{ coord.name }} ({{ coord.contact_number }})</li>
-                                {% empty %}
-                                <li>TBA</li>
-                                {% endfor %}
-                            </ul>
+                    <div class="ui-coordinators-section">
+                        <span class="ui-coord-title">Coordinators</span>
+                        <div class="ui-coord-tags">
+                            {% for coord in event.coordinators.all %}
+                            <div class="ui-coord-pill">
+                                <span class="ui-coord-name">{{ coord.name }}</span>
+                                <span class="ui-coord-phone">{{ coord.contact_number }}</span>
+                            </div>
+                            {% empty %}
+                            <div class="ui-coord-pill"><span class="ui-coord-name">TBA</span></div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -295,7 +435,8 @@
                 <div class="developer-credits">
                     <p class="dev-title">DEVELOPED BY</p>
                     <div class="dev-names">
-                        <a href="https://www.linkedin.com/in/surya-narayanan-193865290/" target="_blank" class="dev-link">Surya
+                        <a href="https://www.linkedin.com/in/surya-narayanan-193865290/" target="_blank"
+                            class="dev-link">Surya
                             Narayanan and Murugan</a>
                         <span class="separator">|</span>
                         <a href="#" target="_blank" class="dev-link">Web Team '26</a>
