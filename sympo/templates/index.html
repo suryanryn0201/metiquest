@@ -97,7 +97,7 @@
             </div>
 
             <div class="video-showcase" id="introVideoWrapper">
-                <video autoplay loop muted playsinline class="sympo-intro-video">
+                <video autoplay loop playsinline class="sympo-intro-video">
                     <source src="{% static 'images/intro.mp4' %}" type="video/mp4"
                         onerror="document.getElementById('introVideoWrapper').style.display='none';">
                 </video>
@@ -235,8 +235,7 @@
                             </svg>
                             <div class="ui-detail-text">
                                 <span class="ui-label">Time</span>
-                                <span class="ui-value">{{ event.start_time|time:"H:i" }} - {{ event.end_time|time:"H:i"
-                                    }}</span>
+                                <span class="ui-value">{{ event.start_time|time:"H:i" }} - {{ event.end_time|time:"H:i" }}</span>
                             </div>
                         </div>
                         <div class="ui-detail-item">
