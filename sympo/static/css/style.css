@@ -445,23 +445,55 @@ input:checked+.slider:before {
         transform: translateY(-20px);
     }
 }
-
-/* Intro Video Container */
+/* --- Desktop / Main Container --- */
 .video-showcase {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     max-width: 1200px;
     margin: 0 auto 50px auto;
-    padding: 0 5%;
+    
+    /* Control the height on desktop so the vertical video 
+       doesn't push all your other content way down the page */
+    height: 75vh; 
+    min-height: 500px;
+    max-height: 800px;
+    
     border-radius: 20px;
     overflow: hidden;
+    padding: 0 5%;
 }
 
 .sympo-intro-video {
     width: 100%;
+    height: 100%;
+    
+    /* 'contain' ensures the entire vertical video is visible 
+       without cropping, adding space on the sides on wide screens */
+    object-fit: contain; 
+    
     border-radius: 20px;
+    background-color: #000; /* Adds a nice black letterbox on the sides for desktop */
     box-shadow: var(--shadow);
-    border: 4px solid var(--white);
-    display: block;
+}
+
+/* --- Mobile Responsive Adjustments --- */
+@media (max-width: 768px) {
+    .video-showcase {
+        height: auto; /* Let the height be determined by the video */
+        padding: 0 5%; 
+        margin-bottom: 30px;
+    }
+
+    .sympo-intro-video {
+        height: auto;
+        max-height: 80vh; /* Prevents it from being taller than the phone screen */
+        
+        /* Optional: Change to 'cover' if you want it to fill the width 
+           and clip the top/bottom slightly on certain phone aspect ratios */
+        object-fit: contain; 
+    }
 }
 
 /* --- Events Cards --- */
