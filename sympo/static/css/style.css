@@ -518,10 +518,30 @@ input:checked+.slider:before {
     color: #d84315;
 }
 
-.event-desc {
+.event-desc, .event-desc-list {
     color: var(--gray);
     margin-bottom: 25px;
     line-height: 1.6;
+}
+
+.event-desc-list {
+    padding-left: 20px;
+    list-style-type: none;
+}
+
+.event-desc-list li {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.event-desc-list li::before {
+    content: "•";
+    color: var(--primary);
+    font-weight: 900;
+    font-size: 1.2rem;
+    position: absolute;
+    left: -18px;
+    top: -2px;
 }
 
 /* --- Custom UI Details Grid (Replaces old text format) --- */

@@ -106,4 +106,33 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }, 1000);
     }
+
+    /* =========================================
+       4. Format Description as List
+    ========================================= */
+    const descElements = document.querySelectorAll('.event-desc');
+    descElements.forEach(desc => {
+        let text = desc.textContent.trim();
+        if (text) {
+            // Split by newline or period (if followed by space or end of string)
+            const points = text.split(/\n|\.\s+|\.$/).filter(p => p.trim().length > 0);
+            
+            if (points.length > 0) {
+                const ul = document.createElement('ul');
+                ul.className = 'event-desc-list';
+                
+                points.forEach(point => {
+                    const li = document.createElement('li');
+                    let liText = point.trim();
+                    if (!/[.!?]$/.test(liText)) {
+                        liText += '.';
+                    }
+                    li.textContent = liText;
+                    ul.appendChild(li);
+                });
+                
+                desc.replaceWith(ul);
+            }
+        }
+    });
 });
