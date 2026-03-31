@@ -279,7 +279,8 @@
                             {% empty %}
                             <div class="ui-coord-pill"><span class="ui-coord-name" style="margin-left: 10px;">TBA</span></div>
                             {% endfor %}
-                        </div></div>
+                        </div>
+                    </div>
                 </div>
                 {% empty %}
                 <p class="text-center" style="grid-column: 1 / -1;">Technical events will be announced shortly!</p>
@@ -353,11 +354,16 @@
                         <div class="ui-coord-tags">
                             {% for coord in event.coordinators.all %}
                             <div class="ui-coord-pill">
+                                {% if coord.profile_pic %}
+                                <img src="{{ coord.profile_pic.url }}" alt="{{ coord.name }}" class="ui-coord-mini-avatar">
+                                {% else %}
+                                <img src="{% static 'images/default-avatar.png' %}" alt="Default Avatar" class="ui-coord-mini-avatar">
+                                {% endif %}
                                 <span class="ui-coord-name">{{ coord.name }}</span>
                                 <span class="ui-coord-phone">{{ coord.contact_number }}</span>
                             </div>
                             {% empty %}
-                            <div class="ui-coord-pill"><span class="ui-coord-name">TBA</span></div>
+                            <div class="ui-coord-pill"><span class="ui-coord-name" style="margin-left: 10px;">TBA</span></div>
                             {% endfor %}
                         </div>
                     </div>
