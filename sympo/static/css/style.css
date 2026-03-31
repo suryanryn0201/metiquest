@@ -445,6 +445,7 @@ input:checked+.slider:before {
         transform: translateY(-20px);
     }
 }
+
 /* --- Desktop / Main Container --- */
 .video-showcase {
     display: flex;
@@ -453,13 +454,13 @@ input:checked+.slider:before {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto 50px auto;
-    
+
     /* Control the height on desktop so the vertical video 
        doesn't push all your other content way down the page */
-    height: 75vh; 
+    height: 75vh;
     min-height: 500px;
     max-height: 800px;
-    
+
     border-radius: 20px;
     overflow: hidden;
     padding: 0 5%;
@@ -468,31 +469,34 @@ input:checked+.slider:before {
 .sympo-intro-video {
     width: 100%;
     height: 100%;
-    
+
     /* 'contain' ensures the entire vertical video is visible 
        without cropping, adding space on the sides on wide screens */
-    object-fit: contain; 
-    
+    object-fit: contain;
+
     border-radius: 20px;
-    background-color: #000; /* Adds a nice black letterbox on the sides for desktop */
+    background-color: #000;
+    /* Adds a nice black letterbox on the sides for desktop */
     box-shadow: var(--shadow);
 }
 
 /* --- Mobile Responsive Adjustments --- */
 @media (max-width: 768px) {
     .video-showcase {
-        height: auto; /* Let the height be determined by the video */
-        padding: 0 5%; 
+        height: auto;
+        /* Let the height be determined by the video */
+        padding: 0 5%;
         margin-bottom: 30px;
     }
 
     .sympo-intro-video {
         height: auto;
-        max-height: 80vh; /* Prevents it from being taller than the phone screen */
-        
+        max-height: 80vh;
+        /* Prevents it from being taller than the phone screen */
+
         /* Optional: Change to 'cover' if you want it to fill the width 
            and clip the top/bottom slightly on certain phone aspect ratios */
-        object-fit: contain; 
+        object-fit: contain;
     }
 }
 
@@ -550,7 +554,8 @@ input:checked+.slider:before {
     color: #d84315;
 }
 
-.event-desc, .event-desc-list {
+.event-desc,
+.event-desc-list {
     color: var(--gray);
     margin-bottom: 25px;
     line-height: 1.6;
@@ -647,13 +652,14 @@ input:checked+.slider:before {
     margin-bottom: 10px;
     letter-spacing: 1px;
 }
-.ui-coord-pill { 
-    background: var(--light); 
-    display: inline-flex; 
-    align-items: center; 
-    border-radius: 30px; 
-    padding: 4px 15px 4px 4px; 
-    border: 1px solid rgba(0,0,0,0.05); 
+
+.ui-coord-pill {
+    background: var(--light);
+    display: inline-flex;
+    align-items: center;
+    border-radius: 30px;
+    padding: 4px 15px 4px 4px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .ui-coord-mini-avatar {
@@ -839,25 +845,69 @@ input:checked+.slider:before {
     color: var(--gray);
 }
 
-/* --- Dark Mode Variables --- */
+/* ========================================================
+   --- Dark Mode Variables & Space Vibe --- 
+   ======================================================== */
 [data-theme="dark"] {
-    --dark: #f4f6f9;
-    --light: #18191a;
-    --white: #242526;
-    --gray: #b0b3b8;
-    --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    --dark: #e0e6ed;
+    --light: transparent;
+    /* Let the stars show through */
+    --white: rgba(20, 20, 30, 0.6);
+    /* Translucent glass background for cards */
+    --gray: #a0a5b0;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(247, 127, 0, 0.15);
+    /* Slight orange space glow */
 }
 
+/* Create the moving starry background */
 [data-theme="dark"] body {
-    background-color: #121212;
+    background-color: #050608;
+    /* Deep space dark */
+    background-image:
+        radial-gradient(1px 1px at 25px 5px, #ffffff, transparent),
+        radial-gradient(1px 1px at 50px 25px, rgba(255, 255, 255, 0.8), transparent),
+        radial-gradient(1px 1px at 125px 20px, #ffffff, transparent),
+        radial-gradient(1.5px 1.5px at 50px 75px, rgba(255, 255, 255, 0.9), transparent),
+        radial-gradient(2px 2px at 15px 125px, #ffffff, transparent),
+        radial-gradient(2.5px 2.5px at 110px 80px, rgba(247, 127, 0, 0.8), transparent),
+        /* Orange star element */
+        radial-gradient(1px 1px at 90px 110px, #ffffff, transparent),
+        radial-gradient(1.5px 1.5px at 140px 140px, rgba(255, 255, 255, 0.7), transparent);
+    background-size: 150px 150px;
+    animation: spaceDrift 90s linear infinite;
+}
+
+@keyframes spaceDrift {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: -300px 300px;
+    }
+}
+
+/* Glassmorphism: Frosted glass effect so the moving stars are visible behind elements */
+[data-theme="dark"] .event-card,
+[data-theme="dark"] .ui-detail-item,
+[data-theme="dark"] .ui-coord-pill,
+[data-theme="dark"] .time-box,
+[data-theme="dark"] .contact,
+[data-theme="dark"] .date-badge,
+[data-theme="dark"] .gallery-item img,
+[data-theme="dark"] .footer {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 [data-theme="dark"] .header {
-    background: rgba(36, 37, 38, 0.95);
+    background: rgba(10, 10, 15, 0.85);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 [data-theme="dark"] .bg-light {
-    background-color: #1e1e1e;
+    background-color: transparent;
 }
 
 [data-theme="dark"] .footer-bottom {
@@ -872,13 +922,17 @@ input:checked+.slider:before {
     border-color: rgba(255, 255, 255, 0.1);
 }
 
+/* Make UI items glow slightly on hover in dark mode */
 [data-theme="dark"] .ui-detail-item:hover {
-    background: #2a2b2c;
+    background: rgba(40, 40, 50, 0.8);
+    border: 1px solid rgba(247, 127, 0, 0.3);
 }
 
 [data-theme="dark"] .sympo-intro-video {
-    border-color: #242526;
+    border-color: rgba(255, 255, 255, 0.1);
 }
+
+/* ======================================================== */
 
 /* --- Responsive Layout (Tablets & Mobile) --- */
 @media (max-width: 991px) {
