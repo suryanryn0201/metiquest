@@ -8,7 +8,9 @@ def index(request):
     
     # 2. Split coordinators
     faculty_coordinators = Coordinator.objects.filter(role='Faculty')
-    student_coordinators = Coordinator.objects.filter(role='Student')
+    fourth_year_coords = Coordinator.objects.filter(role='Student', year='4th Year')
+    third_year_coords = Coordinator.objects.filter(role='Student', year='3rd Year')
+    second_year_coords = Coordinator.objects.filter(role='Student', year='2nd Year')
     
     # 3. Gallery
     gallery_images = Gallery.objects.all().order_by('heading', '-uploaded_at')
@@ -21,13 +23,15 @@ def index(request):
 
     # 5. Pass everything to the template
     context = {
-        'tech_events': tech_events,       # Replaces 'events'
-        'non_tech_events': non_tech_events, # New addition
+        'tech_events': tech_events,      
+        'non_tech_events': non_tech_events,
         'faculty_coordinators': faculty_coordinators,
-        'student_coordinators': student_coordinators,
+        'fourth_year_coords': fourth_year_coords,
+        'third_year_coords': third_year_coords,
+        'second_year_coords': second_year_coords,
         'gallery_images': gallery_images,
         'workshops': workshops,
-        'sympo_reg_link': sympo_reg_link,       # Updated context
+        'sympo_reg_link': sympo_reg_link, 
         'workshop_reg_link': workshop_reg_link,
     }
     

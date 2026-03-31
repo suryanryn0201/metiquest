@@ -103,7 +103,7 @@
             </div>
 
             <div class="video-showcase" id="introVideoWrapper">
-                 <video src="{% static 'images/intro.mp4' %}" autoplay loop playsinline controls class="sympo-intro-video"></video>
+                 <video src="{% static 'images/intro.mp4' %}" autoplay loop muted playsinline controls class="sympo-intro-video"></video>
             </div>
         </main>
 
@@ -263,20 +263,23 @@
                         </div>
                         {% endif %}
                     </div>
-
                     <div class="ui-coordinators-section">
                         <span class="ui-coord-title">Coordinators</span>
                         <div class="ui-coord-tags">
                             {% for coord in event.coordinators.all %}
                             <div class="ui-coord-pill">
+                                {% if coord.profile_pic %}
+                                <img src="{{ coord.profile_pic.url }}" alt="{{ coord.name }}" class="ui-coord-mini-avatar">
+                                {% else %}
+                                <img src="{% static 'images/default-avatar.png' %}" alt="Default Avatar" class="ui-coord-mini-avatar">
+                                {% endif %}
                                 <span class="ui-coord-name">{{ coord.name }}</span>
                                 <span class="ui-coord-phone">{{ coord.contact_number }}</span>
                             </div>
                             {% empty %}
-                            <div class="ui-coord-pill"><span class="ui-coord-name">TBA</span></div>
+                            <div class="ui-coord-pill"><span class="ui-coord-name" style="margin-left: 10px;">TBA</span></div>
                             {% endfor %}
-                        </div>
-                    </div>
+                        </div></div>
                 </div>
                 {% empty %}
                 <p class="text-center" style="grid-column: 1 / -1;">Technical events will be announced shortly!</p>
@@ -386,9 +389,9 @@
                 {% endfor %}
             </div>
 
-            <h3 class="coord-split-title mt-5">Student Coordinators</h3>
+            <h3 class="coord-split-title mt-5">4th Year Coordinators</h3>
             <div class="coordinators-grid minimal-grid">
-                {% for coord in student_coordinators %}
+                {% for coord in fourth_year_coords %}
                 <div class="coordinator-profile">
                     {% if coord.profile_pic %}
                     <img src="{{ coord.profile_pic.url }}" alt="{{ coord.name }}" class="coord-avatar">
@@ -396,9 +399,49 @@
                     <img src="{% static 'images/default-avatar.png' %}" alt="Default Avatar" class="coord-avatar">
                     {% endif %}
                     <h4>{{ coord.name }}</h4>
-                    <p class="role-tag student-tag">Student {% if coord.year %}| {{ coord.year }}{% endif %}</p>
+                    <p class="role-tag student-tag">4th Year</p>
                     <p class="contact">{{ coord.contact_number }}</p>
                 </div>
+                {% empty %}
+                <p class="text-center" style="grid-column: 1 / -1;">4th Year coordinators will be updated soon.</p>
+                {% endfor %}
+            </div>
+
+            <h3 class="coord-split-title mt-5">3rd Year Coordinators</h3>
+            <div class="coordinators-grid minimal-grid">
+                {% for coord in third_year_coords %}
+                <div class="coordinator-profile">
+                    {% if coord.profile_pic %}
+                    <img src="{{ coord.profile_pic.url }}" alt="{{ coord.name }}" class="coord-avatar">
+                    {% else %}
+                    <img src="{% static 'images/default-avatar.png' %}" alt="Default Avatar" class="coord-avatar">
+                    {% endif %}
+                    <h4>{{ coord.name }}</h4>
+                    <p class="role-tag student-tag" style="background: #e3f2fd; color: #1565c0;">3rd Year</p>
+                    <p class="contact">{{ coord.contact_number }}</p>
+                </div>
+                {% empty %}
+                <p class="text-center" style="grid-column: 1 / -1;">3rd Year coordinators will be updated soon.</p>
+                {% endfor %}
+            </div>
+
+            <h3 class="coord-split-title mt-5">2nd Year Coordinators</h3>
+            <div class="coordinators-grid minimal-grid">
+                {% for coord in second_year_coords %}
+                <div class="coordinator-profile">
+                    {% if coord.profile_pic %}
+                    <img src="{{ coord.profile_pic.url }}" alt="{{ coord.name }}" class="coord-avatar">
+                    {% else %}
+                    <img src="{% static 'images/default-avatar.png' %}" alt="Default Avatar" class="coord-avatar">
+                    {% endif %}
+                    <h4>{{ coord.name }}</h4>
+                    <p class="role-tag student-tag" style="background: #f3e5f5; color: #6a1b9a;">2nd Year</p>
+                    <p class="contact">{{ coord.contact_number }}</p>
+                </div>
+                {% empty %}
+                <p class="text-center" style="grid-column: 1 / -1;">2nd Year coordinators will be updated soon.</p>
+                {% endfor %}
+            </div>
                 {% empty %}
                 <p class="text-center" style="grid-column: 1 / -1;">Student coordinators will be updated soon.</p>
                 {% endfor %}

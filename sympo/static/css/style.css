@@ -647,20 +647,28 @@ input:checked+.slider:before {
     margin-bottom: 10px;
     letter-spacing: 1px;
 }
+.ui-coord-pill { 
+    background: var(--light); 
+    display: inline-flex; 
+    align-items: center; 
+    border-radius: 30px; 
+    padding: 4px 15px 4px 4px; 
+    border: 1px solid rgba(0,0,0,0.05); 
+}
+
+.ui-coord-mini-avatar {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 8px;
+    border: 2px solid var(--white);
+}
 
 .ui-coord-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-}
-
-.ui-coord-pill {
-    background: var(--light);
-    display: inline-flex;
-    align-items: center;
-    border-radius: 30px;
-    padding: 6px 15px;
-    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .ui-coord-name {
